@@ -42,3 +42,16 @@ Hi-bit isometric pixel art character sprites, **animated GIFs**, and **5×8 mast
 
 ### 3. Individual Sliced & Stabilized Frames (`80` transparent `.png` frames)
 - `sprites/bastion/se/` & `sprites/bastion/nw/` (`idle_0..7.png`, `walk_0..7.png`, `run_0..7.png`, `sword_shield_0..7.png`, `glaive_0..7.png`)
+---
+
+## Weapon-Ready Standing Idles (Sword + Shield & Two-Handed Glaive — `SE` & `NW`)
+
+In addition to the unarmed hydraulic breathing idle, the Bastion now includes dedicated 8-frame standing **Weapon-Ready Idles** holding the Siege Broadsword + Reactor Riot Shield and the Two-Handed Siege Glaive:
+
+![Bastion Unarmed vs Weapon-Ready Idles](gifs/bastion_idles_showcase.gif)
+
+- **Separate 2×8 Sheets (`2048×680`, `SE` top / `NW` bottom):**
+  - [`sprites/bastion_idle_sword_shield_sheet.png`](sprites/bastion_idle_sword_shield_sheet.png)
+  - [`sprites/bastion_idle_glaive_sheet.png`](sprites/bastion_idle_glaive_sheet.png)
+- **Transparent GIFs & 1×8 Strips:** `gifs/bastion_{se|nw}_idle_{sword_shield|glaive}.gif` & `sprites/bastion_{se|nw}_idle_{sword_shield|glaive}_strip.png`
+- **Individual Frames:** `sprites/bastion/{se|nw}/idle_{sword_shield|glaive}_{0..7}.png`

@@ -23,11 +23,11 @@ REPO_HTML = REPO / "bastion_isometric_previewer.html"
 REPO_INDEX = REPO / "index.html"
 
 MAPPING = {
-    "bastion_se": "bastion_isometric_se_5row_master.png",
-    "bastion_nw": "bastion_isometric_nw_5row_master.png",
+    "bastion_se": ("bastion_isometric_se_5row_master.png", "bastion_se_idle_sword_shield_strip.png", "bastion_se_idle_glaive_strip.png"),
+    "bastion_nw": ("bastion_isometric_nw_5row_master.png", "bastion_nw_idle_sword_shield_strip.png", "bastion_nw_idle_glaive_strip.png"),
 }
 
-STANDALONE_STYLE = """  <title>Bastion (Old Guild Siege Armor) — 5×8 Isometric Previewer</title>
+STANDALONE_STYLE = """  <title>Bastion (Old Guild Siege Armor) — Isometric Sprite, Weapon Idles &amp; Combat Previewer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
@@ -61,9 +61,15 @@ STANDALONE_STYLE = """  <title>Bastion (Old Guild Siege Armor) — 5×8 Isometri
 
 def main() -> None:
     data: dict[str, str] = {}
-    for k, fname in MAPPING.items():
-        im = Image.open(SPRITES_DIR / fname)
-        small = im.resize((1024, 850), Image.Resampling.NEAREST).quantize(
+    for k, (master_f, ss_idle_f, gl_idle_f) in MAPPING.items():
+        m_im = Image.open(SPRITES_DIR / master_f).convert("RGBA")
+        ss_im = Image.open(SPRITES_DIR / ss_idle_f).convert("RGBA")
+        gl_im = Image.open(SPRITES_DIR / gl_idle_f).convert("RGBA")
+        full = Image.new("RGBA", (2048, 340 * 7), (0, 0, 0, 0))
+        full.paste(m_im, (0, 0))
+        full.paste(ss_im, (0, 340 * 5))
+        full.paste(gl_im, (0, 340 * 6))
+        small = full.resize((1024, 170 * 7), Image.Resampling.NEAREST).quantize(
             colors=64, method=Image.Quantize.FASTOCTREE
         )
         buf = io.BytesIO()
